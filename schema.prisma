@@ -35,7 +35,7 @@ model MemberOfParliament {
   toDate       DateTime?
 
   partyName String
-  party     Party   @relation(fields: [partyName], references: [name])
+  party     Party?  @relation(fields: [partyName], references: [name])
   Leader    Leader?
 }
 
