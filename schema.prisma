@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./client"
+  provider      = "prisma-client-js"
+  output        = "./client"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -9,26 +10,32 @@ datasource db {
 }
 
 model Party {
-  name        String @id @unique
-  description String
-  logo        Bytes
+  name        String  @id @unique
+  description String?
+  logo        Bytes?
 
   members MemberOfParliament[]
   Leader  Leader?
 }
 
+model Politician {
+  id                 Int                 @id @default(autoincrement())
+  firstName          String
+  lastName           String
+  MemberOfParliament MemberOfParliament?
+}
+
 model MemberOfParliament {
-  id           Int       @id @default(autoincrement())
-  firstName    String
-  lastName     String
-  constituency String    @unique
+  id           Int        @id
+  Politician   Politician @relation(fields: [id], references: [id])
+  constituency String     @unique
   province     String
-  picture      Bytes
+  picture      Bytes?
   fromDate     DateTime
   toDate       DateTime?
 
   partyName String
-  party     Party   @relation(fields: [partyName], references: [name])
+  party     Party?  @relation(fields: [partyName], references: [name])
   Leader    Leader?
 }
 
