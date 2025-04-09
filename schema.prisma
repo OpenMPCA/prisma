@@ -23,6 +23,8 @@ model Politician {
   firstName          String
   lastName           String
   MemberOfParliament MemberOfParliament?
+
+  @@unique([firstName, lastName])
 }
 
 model MemberOfParliament {
