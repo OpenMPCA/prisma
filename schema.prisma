@@ -11,7 +11,7 @@ datasource db {
 
 model Party {
   name        String  @id @unique
-  shortName   String?  @unique
+  shortName   String? @unique
   description String?
   logo        Bytes?
 
@@ -25,7 +25,8 @@ model Politician {
   lastName           String
   MemberOfParliament MemberOfParliament?
 
-  Leader Leader?
+  Leader  Leader?
+  Senator Senator[]
 
   @@unique([firstName, lastName])
 }
@@ -41,6 +42,11 @@ model MemberOfParliament {
 
   partyName String?
   party     Party?  @relation(fields: [partyName], references: [name])
+}
+
+model Senator {
+  id         Int        @id
+  Politician Politician @relation(fields: [id], references: [id])
 }
 
 model Leader {
