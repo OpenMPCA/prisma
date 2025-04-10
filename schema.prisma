@@ -11,7 +11,7 @@ datasource db {
 
 model Party {
   name        String  @id @unique
-  shortName   String  @unique
+  shortName   String?  @unique
   description String?
   logo        Bytes?
 
