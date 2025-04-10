@@ -25,6 +25,8 @@ model Politician {
   lastName           String
   MemberOfParliament MemberOfParliament?
 
+  Leader Leader?
+
   @@unique([firstName, lastName])
 }
 
@@ -39,15 +41,14 @@ model MemberOfParliament {
 
   partyName String?
   party     Party?  @relation(fields: [partyName], references: [name])
-  Leader    Leader?
 }
 
 model Leader {
   partyName String @unique
   Party     Party  @relation(fields: [partyName], references: [name])
 
-  memberId           Int                @unique
-  MemberOfParliament MemberOfParliament @relation(fields: [memberId], references: [id])
+  politicianId Int        @unique
+  Politician   Politician @relation(fields: [politicianId], references: [id])
 
-  @@id([partyName, memberId])
+  @@id([partyName, politicianId])
 }
