@@ -12,6 +12,7 @@ datasource db {
 model Party {
   name        String  @id @unique
   shortName   String? @unique
+  registered  Boolean @default(false)
   description String?
   logo        Bytes?
 
