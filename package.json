@@ -25,5 +25,8 @@
   "keywords": [],
   "author": "Abdul Hadi <2003abdulhadi@gmail.com>",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  }
 }
